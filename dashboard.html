@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Ascend</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <span class="mark">A</span>
+      <span class="name">Ascend</span>
+    </a>
+
+    <nav class="nav-group">
+      <a href="dashboard.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Dashboard
+      </a>
+      <a href="applications.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Applications
+      </a>
+      <a href="profile.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="login.html" class="nav-item" data-logout>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Overview</span>
+        <h1>Dashboard</h1>
+        <p class="subtitle">Here's where your search stands today.</p>
+      </div>
+      <a href="applications.html?action=add" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Add Application
+      </a>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--accent-muted); color:var(--accent);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <span class="stat-label">Total Applications</span>
+        <span class="stat-value" id="stat-total">0</span>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--status-interview-bg); color:var(--status-interview);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <span class="stat-label">Interviews</span>
+        <span class="stat-value" id="stat-interviews">0</span>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--status-offer-bg); color:var(--status-offer);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <span class="stat-label">Offers</span>
+        <span class="stat-value" id="stat-offers">0</span>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--status-rejected-bg); color:var(--status-rejected);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+        </div>
+        <span class="stat-label">Rejections</span>
+        <span class="stat-value" id="stat-rejections">0</span>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>Recent Applications</h2>
+      <a href="applications.html" class="btn btn-secondary btn-sm">View all</a>
+    </div>
+
+    <div class="table-wrap" id="recent-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Company</th><th>Status</th><th>Type</th><th>Mode</th><th>Applied</th><th>Notes</th></tr>
+        </thead>
+        <tbody id="recent-apps-body"></tbody>
+      </table>
+    </div>
+
+    <div class="empty-state" id="recent-empty" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <h3>No applications yet</h3>
+      <p>Start tracking your search by adding your first application.</p>
+      <a href="applications.html?action=add" class="btn btn-primary">Add Application</a>
+    </div>
+  </main>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/sidebar.js"></script>
+</body>
+</html>

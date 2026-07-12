@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Ascend</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="auth-shell">
+  <a href="index.html" class="back-home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to home
+  </a>
+
+  <div class="auth-card">
+    <a href="index.html" class="auth-brand">
+      <span class="mark">A</span>
+      <span class="name">Ascend</span>
+    </a>
+
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Log in to keep track of where you stand.</p>
+
+    <form id="login-form" novalidate>
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" class="input" placeholder="you@example.com" autocomplete="email" />
+      </div>
+
+      <div class="field">
+        <label for="login-password">Password</label>
+        <div class="password-wrap">
+          <input type="password" id="login-password" class="input" placeholder="Enter your password" autocomplete="current-password" />
+          <button type="button" class="password-toggle" aria-label="Toggle password visibility"></button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary auth-submit">Login</button>
+    </form>
+
+    <p class="auth-footer">Don't have an account? <a href="register.html">Sign up</a></p>
+  </div>
+
+  <div class="mini-pipeline-hint">
+    <span class="dot"></span>
+    Wishlist → Applied → OA → Interview → Offer
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

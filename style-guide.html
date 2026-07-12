@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — Job Tracker</title>
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .swatch { width: 100%; height: 56px; border-radius: 10px; margin-bottom: 8px; border: 1px solid var(--border); }
+  .swatch-label { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); }
+  .section { margin-bottom: 48px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  .demo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <div class="main" style="max-width: 1000px;">
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Phase 1</span>
+        <h1>Design System Preview</h1>
+        <p class="subtitle">Colors, type, and shared components — review before pages are built on top of this.</p>
+      </div>
+    </div>
+
+    <!-- COLORS -->
+    <div class="section">
+      <h2 class="mt-24" style="margin-bottom:16px;">Colors</h2>
+      <div class="demo-grid">
+        <div><div class="swatch" style="background:var(--bg)"></div><span class="swatch-label">bg</span></div>
+        <div><div class="swatch" style="background:var(--surface)"></div><span class="swatch-label">surface</span></div>
+        <div><div class="swatch" style="background:var(--accent)"></div><span class="swatch-label">accent</span></div>
+        <div><div class="swatch" style="background:var(--status-applied)"></div><span class="swatch-label">applied</span></div>
+        <div><div class="swatch" style="background:var(--status-oa)"></div><span class="swatch-label">oa</span></div>
+        <div><div class="swatch" style="background:var(--status-interview)"></div><span class="swatch-label">interview</span></div>
+        <div><div class="swatch" style="background:var(--status-offer)"></div><span class="swatch-label">offer</span></div>
+        <div><div class="swatch" style="background:var(--status-rejected)"></div><span class="swatch-label">rejected</span></div>
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Typography</h2>
+      <h1>Space Grotesk — Heading 28/700</h1>
+      <h2 class="mt-8">Space Grotesk — Heading 20/600</h2>
+      <p class="mt-16">Inter — Body text, 15px regular. Used for descriptions, form labels' companion text, and general reading content across the app.</p>
+      <p class="mono mt-8" style="color:var(--text-secondary)">JetBrains Mono — used for dates, status badges, and data-like fragments.</p>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Buttons</h2>
+      <div class="row">
+        <button class="btn btn-primary">Add Application</button>
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-ghost">Ghost action</button>
+        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-secondary btn-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- BADGES -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Status Badges</h2>
+      <div class="row">
+        <span class="badge badge-wishlist">Wishlist</span>
+        <span class="badge badge-applied">Applied</span>
+        <span class="badge badge-oa">OA</span>
+        <span class="badge badge-interview">Interview</span>
+        <span class="badge badge-offer">Offer</span>
+        <span class="badge badge-rejected">Rejected</span>
+        <span class="tag">Intern</span>
+        <span class="tag">Full-time</span>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Form Elements</h2>
+      <div style="max-width:400px;">
+        <div class="field">
+          <label>Company Name</label>
+          <input class="input" placeholder="e.g. Rippling" />
+        </div>
+        <div class="field">
+          <label>Job Type</label>
+          <select class="input">
+            <option>Internship</option>
+            <option>Full-time</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Email <span class="optional-tag">required</span></label>
+          <input class="input error" placeholder="you@example.com" />
+          <span class="error-text">⚠ Please enter a valid email address</span>
+        </div>
+        <div class="field">
+          <label>Search</label>
+          <div class="input-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input class="input" placeholder="Search by company..." />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOGGLES -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Toggles</h2>
+      <div class="row">
+        <div class="toggle-group">
+          <span class="toggle-option active">Internship</span>
+          <span class="toggle-option">Full-time</span>
+        </div>
+        <div class="switch on"></div>
+        <div class="switch"></div>
+        <span class="text-secondary" style="font-size:13px;">Referral</span>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Stat Cards</h2>
+      <div class="row" style="align-items:stretch;">
+        <div class="stat-card" style="width:180px;">
+          <div class="stat-icon" style="background:var(--accent-muted); color:var(--accent);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          </div>
+          <span class="stat-label">Total Applications</span>
+          <span class="stat-value">24</span>
+        </div>
+        <div class="stat-card" style="width:180px;">
+          <div class="stat-icon" style="background:var(--status-interview-bg); color:var(--status-interview);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <span class="stat-label">Interviews</span>
+          <span class="stat-value">5</span>
+        </div>
+        <div class="stat-card" style="width:180px;">
+          <div class="stat-icon" style="background:var(--status-offer-bg); color:var(--status-offer);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <span class="stat-label">Offers</span>
+          <span class="stat-value">2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Pipeline Tracker (signature element)</h2>
+      <div class="card" style="max-width: 600px;">
+        <div class="pipeline">
+          <div class="pipeline-node done"><div class="pipeline-line"></div><div class="pipeline-dot"></div><span class="pipeline-label">Wishlist</span></div>
+          <div class="pipeline-node done"><div class="pipeline-line"></div><div class="pipeline-dot"></div><span class="pipeline-label">Applied</span></div>
+          <div class="pipeline-node done"><div class="pipeline-line"></div><div class="pipeline-dot"></div><span class="pipeline-label">OA</span></div>
+          <div class="pipeline-node current"><div class="pipeline-line"></div><div class="pipeline-dot"></div><span class="pipeline-label">Interview</span></div>
+          <div class="pipeline-node"><div class="pipeline-line"></div><div class="pipeline-dot"></div><span class="pipeline-label">Offer</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLTIP -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Notes Icon + Tooltip</h2>
+      <div class="row">
+        <div class="tooltip-wrap" tabindex="0">
+          <button class="notes-icon has-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          </button>
+          <div class="tooltip-bubble">Referred by Priya from the SDE team — mentioned fast turnaround on OA results.</div>
+        </div>
+        <span class="text-secondary" style="font-size:13px;">Hover or focus the icon to preview a note</span>
+      </div>
+    </div>
+
+    <!-- TABLE ROW SAMPLE -->
+    <div class="section">
+      <h2 style="margin-bottom:16px;">Table Row Sample</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Company</th><th>Status</th><th>Type</th><th>Applied</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="company-cell">
+                  <div class="company-logo">RP</div>
+                  <div>
+                    <div class="company-name">Rippling</div>
+                    <div class="role-sub">SDE Intern</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge badge-interview">Interview</span></td>
+              <td><span class="tag">Internship</span></td>
+              <td class="mono text-secondary">Jul 08, 2026</td>
+              <td>
+                <div class="tooltip-wrap" tabindex="0">
+                  <button class="notes-icon has-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                  </button>
+                  <div class="tooltip-bubble">Offline round, live hidden test cases — revise DP before this one.</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
