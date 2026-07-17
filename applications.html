@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applications — Ascend</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/applications.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <span class="mark">A</span>
+      <span class="name">Ascend</span>
+    </a>
+
+    <nav class="nav-group">
+      <a href="dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Dashboard
+      </a>
+      <a href="applications.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Applications
+      </a>
+      <a href="profile.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="login.html" class="nav-item" data-logout>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <h1>Applications</h1>
+        <p class="subtitle"><span id="results-count">0 of 0</span> applications</p>
+      </div>
+      <button class="btn btn-primary" onclick="openApplicationForm('add')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Add Application
+      </button>
+    </div>
+
+    <div class="filters-row">
+      <div class="input-icon-wrap search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="input" id="search-input" placeholder="Search by company..." />
+      </div>
+
+      <div class="filter-chips">
+        <span class="chip active" data-status="all">All</span>
+        <span class="chip" data-status="Wishlist">Wishlist</span>
+        <span class="chip" data-status="Applied">Applied</span>
+        <span class="chip" data-status="OA">OA</span>
+        <span class="chip" data-status="Interview">Interview</span>
+        <span class="chip" data-status="Offer">Offer</span>
+        <span class="chip" data-status="Rejected">Rejected</span>
+      </div>
+    </div>
+
+    <div class="table-wrap" id="applications-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Company</th><th>Status</th><th>Type</th><th>Mode</th><th>Applied</th><th>Notes</th><th>Edit</th></tr>
+        </thead>
+        <tbody id="applications-body"></tbody>
+      </table>
+    </div>
+
+    <div class="empty-state" id="applications-empty" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <h3>No applications found</h3>
+      <p>Try a different search or filter, or add a new application.</p>
+      <button class="btn btn-primary" onclick="openApplicationForm('add')">Add Application</button>
+    </div>
+  </main>
+
+</div>
+
+<!-- Add/Edit Application slide-over -->
+<div class="overlay" id="app-form-overlay" onclick="closeApplicationForm()"></div>
+<div class="slide-panel" id="app-slide-panel">
+  <div class="slide-panel-header">
+    <h2 id="form-title">Add Application</h2>
+    <button class="close-btn" onclick="closeApplicationForm()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="slide-panel-body">
+    <form id="app-form" novalidate>
+      <div class="field">
+        <label for="f-company">Company Name</label>
+        <input type="text" id="f-company" class="input" placeholder="e.g. Rippling" />
+      </div>
+
+      <div class="field">
+        <label for="f-role">Job Role</label>
+        <input type="text" id="f-role" class="input" placeholder="e.g. SDE Intern" />
+      </div>
+
+      <div class="field">
+        <label for="f-location">Location</label>
+        <input type="text" id="f-location" class="input" placeholder="e.g. Bengaluru" />
+      </div>
+
+      <div class="field">
+        <label>Job Type</label>
+        <div class="toggle-group" id="jobType-group">
+          <span class="toggle-option active" data-value="Internship">Internship</span>
+          <span class="toggle-option" data-value="Full-time">Full-time</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Mode</label>
+        <div class="toggle-group" id="mode-group">
+          <span class="toggle-option" data-value="On-Campus">On-Campus</span>
+          <span class="toggle-option active" data-value="Off-Campus">Off-Campus</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-status">Status</label>
+        <select id="f-status" class="input">
+          <option>Wishlist</option>
+          <option>Applied</option>
+          <option>OA</option>
+          <option>Interview</option>
+          <option>Offer</option>
+          <option>Rejected</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="f-dateApplied">Date Applied</label>
+        <input type="date" id="f-dateApplied" class="input" />
+      </div>
+
+      <div class="field">
+        <label for="f-jobLink">Job Link</label>
+        <input type="url" id="f-jobLink" class="input" placeholder="https://company.com/careers/role" />
+      </div>
+
+      <div class="field">
+        <label for="f-notes">Notes <span class="optional-tag">optional</span></label>
+        <textarea id="f-notes" class="input" placeholder="Anything you want to remember about this application..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Referral</label>
+        <div class="flex items-center gap-12">
+          <div class="switch" id="referral-switch"></div>
+          <span class="text-secondary" style="font-size:13px;">This came through a referral</span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="slide-panel-footer">
+    <button type="button" class="btn btn-secondary" onclick="closeApplicationForm()">Cancel</button>
+    <button type="submit" form="app-form" class="btn btn-primary" id="form-submit-btn">Add Application</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/application-form.js"></script>
+<script src="js/applications.js"></script>
+<script src="js/sidebar.js"></script>
+</body>
+</html>

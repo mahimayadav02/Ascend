@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — Ascend</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <span class="mark">A</span>
+      <span class="name">Ascend</span>
+    </a>
+
+    <nav class="nav-group">
+      <a href="dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Dashboard
+      </a>
+      <a href="applications.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Applications
+      </a>
+      <a href="profile.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="login.html" class="nav-item" data-logout>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Account</span>
+        <h1>Profile</h1>
+        <p class="subtitle">Your account details and search progress.</p>
+      </div>
+    </div>
+
+    <!-- ===== VIEW MODE ===== -->
+    <div id="profile-view-mode">
+      <div class="card profile-card">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profile-avatar"></div>
+          <button class="avatar-edit-btn" id="edit-trigger-btn" title="Edit profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </button>
+        </div>
+        <div class="profile-info">
+          <h2 id="profile-name"></h2>
+          <div class="profile-email" id="profile-email"></div>
+          <div class="profile-joined" id="profile-joined"></div>
+        </div>
+        <button class="btn btn-danger" data-logout>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+          Logout
+        </button>
+      </div>
+
+      <div class="profile-section-title">Details</div>
+      <div class="profile-details-grid">
+        <div class="detail-item">
+          <span class="detail-label">Status</span>
+          <span class="detail-value" id="d-status"></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">College</span>
+          <span class="detail-value" id="d-college"></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Branch</span>
+          <span class="detail-value" id="d-branch"></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Experience</span>
+          <span class="detail-value" id="d-experience"></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Personal Email</span>
+          <span class="detail-value" id="d-personal-email"></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">College / Work Email</span>
+          <span class="detail-value" id="d-college-email"></span>
+        </div>
+      </div>
+
+      <div class="profile-section-title">Your Progress</div>
+      <div class="profile-stats">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--accent-muted); color:var(--accent);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <span class="stat-label">Total Applications</span>
+          <span class="stat-value" id="profile-total">0</span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--status-interview-bg); color:var(--status-interview);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <span class="stat-label">Interviews</span>
+          <span class="stat-value" id="profile-interviews">0</span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--status-offer-bg); color:var(--status-offer);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <span class="stat-label">Offers</span>
+          <span class="stat-value" id="profile-offers">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== EDIT MODE ===== -->
+    <div id="profile-edit-mode" class="card" style="display:none; padding:28px;">
+      <h2 style="margin-bottom:22px;">Edit Profile</h2>
+      <form id="profile-edit-form">
+        <div class="edit-form-grid">
+          <div class="field full-width">
+            <label for="e-name">Full Name</label>
+            <input type="text" id="e-name" class="input" placeholder="Your full name" />
+          </div>
+
+          <div class="field full-width">
+            <label>Current Status</label>
+            <div class="toggle-group" id="status-group">
+              <span class="toggle-option active" data-value="Student">Student</span>
+              <span class="toggle-option" data-value="Employee">Employee</span>
+              <span class="toggle-option" data-value="Other">Other</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="e-college">College</label>
+            <input type="text" id="e-college" class="input" placeholder="e.g. IGDTUW" />
+          </div>
+
+          <div class="field">
+            <label for="e-branch">Branch</label>
+            <input type="text" id="e-branch" class="input" placeholder="e.g. CSE" />
+          </div>
+
+          <div class="field">
+            <label for="e-experience">Experience</label>
+            <input type="text" id="e-experience" class="input" placeholder="e.g. Fresher, 6 months" />
+          </div>
+
+          <div class="field">
+            <label for="e-personal-email">Personal Email</label>
+            <input type="email" id="e-personal-email" class="input" placeholder="you@gmail.com" />
+          </div>
+
+          <div class="field full-width">
+            <label for="e-college-email">College / Work Email</label>
+            <input type="email" id="e-college-email" class="input" placeholder="you@college.edu" />
+          </div>
+        </div>
+      </form>
+      <div class="flex gap-8" style="justify-content:flex-end; margin-top:6px;">
+        <button type="button" class="btn btn-secondary" id="cancel-edit-btn">Cancel</button>
+        <button type="submit" form="profile-edit-form" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/sidebar.js"></script>
+</body>
+</html>

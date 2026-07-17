@@ -24,6 +24,36 @@ const SEED_APPLICATIONS = [
   { id: 14, company: 'InfoEdge',         role: 'SDE Intern',                 location: 'Noida',       jobType: 'Internship', mode: 'Off-Campus', status: 'Interview',  dateApplied: '2026-05-10', jobLink: 'https://infoedge.com/careers', notes: 'Two rounds done, waiting on the HM round.', referral: false },
 ];
 
+const USER_STORAGE_KEY = 'ascend_user_v1';
+
+const DEFAULT_USER = {
+  name: 'Mahima Sharma',
+  status: 'Student',
+  college: 'Indira Gandhi Delhi Technical University for Women',
+  branch: 'Computer Science and Engineering',
+  experience: 'Fresher',
+  personalEmail: 'mahima.sharma@gmail.com',
+  collegeWorkEmail: 'mahima.sharma@igdtuw.ac.in',
+  joined: '2026-05-15',
+};
+
+function getUser() {
+  const raw = localStorage.getItem(USER_STORAGE_KEY);
+  if (!raw) {
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(DEFAULT_USER));
+    return { ...DEFAULT_USER };
+  }
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    return { ...DEFAULT_USER };
+  }
+}
+
+function saveUser(user) {
+  localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+}
+
 function getApplications() {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) {
@@ -44,6 +74,28 @@ function saveApplications(apps) {
 
 function getApplicationById(id) {
   return getApplications().find((a) => String(a.id) === String(id));
+}
+
+function addApplication(data) {
+  const apps = getApplications();
+  const newId = apps.length ? Math.max(...apps.map((a) => a.id)) + 1 : 1;
+  apps.push({ id: newId, ...data });
+  saveApplications(apps);
+  return newId;
+}
+
+function updateApplication(id, updates) {
+  const apps = getApplications();
+  const idx = apps.findIndex((a) => String(a.id) === String(id));
+  if (idx !== -1) {
+    apps[idx] = { ...apps[idx], ...updates };
+    saveApplications(apps);
+  }
+}
+
+function deleteApplication(id) {
+  const apps = getApplications().filter((a) => String(a.id) !== String(id));
+  saveApplications(apps);
 }
 
 function getInitials(name) {

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   tbody.innerHTML = recent.map((app) => `
-    <tr onclick="window.location.href='application-details.html?id=${app.id}'">
+    <tr style="cursor:default;">
       <td>
         <div class="company-cell">
           <div class="company-logo">${getInitials(app.company)}</div>
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <td><span class="tag">${app.mode}</span></td>
       <td class="mono text-secondary">${formatDate(app.dateApplied)}</td>
       <td class="notes-cell">
-        <div class="tooltip-wrap" tabindex="0" onclick="event.stopPropagation()">
+        <div class="tooltip-wrap" tabindex="0">
           <button class="notes-icon ${app.notes ? 'has-note' : ''}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           </button>
