@@ -1,70 +1,68 @@
-# 🚀 Ascend
+# Ascend
 
-**Ascend** is a modern job application tracker designed to help job seekers organize applications, monitor interview progress, and stay on top of their placement journey.
+Ascend is a modern job application tracker that helps users organize applications, track interview progress, and manage their job search from a single dashboard.
 
-Built with a clean, minimal interface inspired by modern SaaS products.
+## Features
 
----
+- Landing page
+- User authentication interface
+- Dashboard overview
+- Application management
+- Profile page
+- Responsive design
+- Modern dark-themed UI
 
-## ✨ Features
-
-- 📌 Beautiful landing page
-- 🔐 Login & Registration UI
-- 📊 Dashboard with application statistics
-- 📝 Application management interface
-- 👤 Profile page
-- 🌙 Modern dark theme
-- 📱 Responsive design
-
----
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
-- HTML5
-- CSS3
+- HTML
+- CSS
 - JavaScript
 
-### Backend *(Coming Soon)*
+### Backend (In Progress)
 - PHP
 - MySQL
 
----
+## Project Status
 
-## 📸 Screenshots
-
-> Screenshots will be added soon.
-
----
-
-## 🚧 Project Status
-
-The frontend has been completed.
+The frontend is complete.
 
 The backend is currently under development and will include:
 
-- User Authentication
-- MySQL Database Integration
-- CRUD Operations
-- Search & Filtering
-- Secure Login System
+- User authentication
+- MySQL database integration
+- CRUD operations
+- Search and filtering
+- Secure login system
 
----
+## Screenshots
 
-## 🎯 Future Enhancements
+Screenshots will be added after the project is completed.
 
-- Dashboard Analytics
-- Application Status Tracking
-- Search & Filters
-- Profile Management
-- Responsive Improvements
+## Getting Started
 
----
+1. Clone the repository
 
-## 👩‍💻 Author
+```bash
+git clone https://github.com/mahimayadav02/Ascend.git
+```
 
-**Mahima Yadav**
+2. Navigate to the project
 
----
+```bash
+cd Ascend
+```
 
-### ⭐ If you like this project, consider giving it a star!
+3. Open `index.html` in your browser.
+
+## Future Improvements
+
+- Dashboard analytics
+- Advanced filtering
+- Application timeline
+- Interview tracking
+- Responsive enhancements
+
+## Author
+
+Mahima Yadav
