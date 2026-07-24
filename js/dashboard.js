@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const apps = getApplications();
+document.addEventListener('DOMContentLoaded', async () => {
+  const apps = await getApplications();
 
   // ---- Stats ----
   const total = apps.length;

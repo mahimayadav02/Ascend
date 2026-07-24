@@ -1,8 +1,8 @@
 let currentFilter = 'all';
 let currentSearch = '';
 
-function renderApplicationsTable() {
-  const apps = getApplications();
+async function renderApplicationsTable() {
+  const apps = await getApplications();
 
   const filtered = apps
     .filter((a) => currentFilter === 'all' || a.status === currentFilter)

@@ -7,7 +7,7 @@
 
 let currentEditId = null;
 
-function openApplicationForm(mode, appId) {
+async function openApplicationForm(mode, appId) {
   currentEditId = mode === 'edit' ? appId : null;
   const panel = document.getElementById('app-slide-panel');
   const overlay = document.getElementById('app-form-overlay');
@@ -23,8 +23,11 @@ function openApplicationForm(mode, appId) {
   document.getElementById('form-title').textContent = mode === 'edit' ? 'Edit Application' : 'Add Application';
   document.getElementById('form-submit-btn').textContent = mode === 'edit' ? 'Save Changes' : 'Add Application';
 
+  overlay.classList.add('open');
+  panel.classList.add('open');
+
   if (mode === 'edit') {
-    const app = getApplicationById(appId);
+    const app = await getApplicationById(appId);
     if (app) {
       document.getElementById('f-company').value = app.company;
       document.getElementById('f-role').value = app.role;
@@ -38,9 +41,6 @@ function openApplicationForm(mode, appId) {
       setSwitch('referral-switch', app.referral);
     }
   }
-
-  overlay.classList.add('open');
-  panel.classList.add('open');
 }
 
 function closeApplicationForm() {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('app-form');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearFormErrors(form);
 
@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const location = document.getElementById('f-location');
     const dateApplied = document.getElementById('f-dateApplied');
     const jobLink = document.getElementById('f-jobLink');
+    const submitBtn = document.getElementById('form-submit-btn');
     let valid = true;
 
     if (!company.value.trim()) { showFormError(company, 'Company name is required'); valid = false; }
@@ -144,13 +145,26 @@ document.addEventListener('DOMContentLoaded', () => {
       referral: getSwitchValue('referral-switch'),
     };
 
-    if (currentEditId) {
-      updateApplication(currentEditId, appData);
-    } else {
-      addApplication(appData);
-    }
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving...';
 
-    closeApplicationForm();
-    if (window.onApplicationSaved) window.onApplicationSaved();
+    try {
+      const result = currentEditId
+        ? await updateApplication(currentEditId, appData)
+        : await addApplication(appData);
+
+      if (result.success) {
+        closeApplicationForm();
+        if (window.onApplicationSaved) window.onApplicationSaved();
+      } else {
+        showFormError(company, result.message || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      showFormError(company, 'Could not reach the server. Is XAMPP running?');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
   });
 });

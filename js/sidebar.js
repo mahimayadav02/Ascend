@@ -32,7 +32,12 @@ function initLogoutConfirm() {
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  document.getElementById('logout-confirm-btn').addEventListener('click', () => {
+  document.getElementById('logout-confirm-btn').addEventListener('click', async () => {
+    try {
+      await fetch('backend/auth/logout.php', { method: 'POST' });
+    } catch (err) {
+      // even if the request fails, still send them to login
+    }
     window.location.href = 'login.html';
   });
 

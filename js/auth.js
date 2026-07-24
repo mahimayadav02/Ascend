@@ -1,7 +1,5 @@
 // ============================================
-// AUTH — validation + mock submit behavior
-// Mock only: no real backend calls yet.
-// On successful validation, navigates to dashboard.html
+// AUTH — validation + real backend calls
 // ============================================
 
 const EYE_OPEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>';
@@ -46,15 +44,21 @@ function clearAllErrors(form) {
   form.querySelectorAll('.input').forEach(clearError);
 }
 
+function setSubmitLoading(button, loading, loadingText, defaultText) {
+  button.disabled = loading;
+  button.textContent = loading ? loadingText : defaultText;
+}
+
 // ---------- LOGIN ----------
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearAllErrors(loginForm);
 
     const email = document.getElementById('login-email');
     const password = document.getElementById('login-password');
+    const submitBtn = loginForm.querySelector('button[type="submit"]');
     let valid = true;
 
     if (!email.value.trim()) {
@@ -70,9 +74,27 @@ if (loginForm) {
       valid = false;
     }
 
-    if (valid) {
-      // Mock auth — real backend integration replaces this later
-      window.location.href = 'dashboard.html';
+    if (!valid) return;
+
+    setSubmitLoading(submitBtn, true, 'Logging in...', 'Login');
+
+    try {
+      const res = await fetch('backend/auth/login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.value.trim(), password: password.value }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        window.location.href = 'dashboard.html';
+      } else {
+        showError(password, data.message || 'Invalid email or password.');
+      }
+    } catch (err) {
+      showError(password, 'Could not reach the server. Is XAMPP running?');
+    } finally {
+      setSubmitLoading(submitBtn, false, 'Logging in...', 'Login');
     }
   });
 }
@@ -80,7 +102,7 @@ if (loginForm) {
 // ---------- REGISTER ----------
 const registerForm = document.getElementById('register-form');
 if (registerForm) {
-  registerForm.addEventListener('submit', (e) => {
+  registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearAllErrors(registerForm);
 
@@ -88,6 +110,7 @@ if (registerForm) {
     const email = document.getElementById('register-email');
     const password = document.getElementById('register-password');
     const confirm = document.getElementById('register-confirm');
+    const submitBtn = registerForm.querySelector('button[type="submit"]');
     let valid = true;
 
     if (!name.value.trim()) {
@@ -119,9 +142,31 @@ if (registerForm) {
       valid = false;
     }
 
-    if (valid) {
-      // Mock auth — real backend integration replaces this later
-      window.location.href = 'dashboard.html';
+    if (!valid) return;
+
+    setSubmitLoading(submitBtn, true, 'Creating account...', 'Sign Up');
+
+    try {
+      const res = await fetch('backend/auth/register.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.value.trim(),
+          email: email.value.trim(),
+          password: password.value,
+        }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        window.location.href = 'dashboard.html';
+      } else {
+        showError(email, data.message || 'Could not create account.');
+      }
+    } catch (err) {
+      showError(email, 'Could not reach the server. Is XAMPP running?');
+    } finally {
+      setSubmitLoading(submitBtn, false, 'Creating account...', 'Sign Up');
     }
   });
 }
